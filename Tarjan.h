@@ -16,5 +16,5 @@ private:
 public:
     GraphT(int verticesCount) : verticesCount(verticesCount), adjacencies(verticesCount), visited(verticesCount, false) {}
     void addEdge(int verticeOut, int verticeIn);
-    void topologicalSort();
+    std::wstring topologicalSort();
 };

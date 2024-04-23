@@ -1,48 +1,57 @@
 #include "Kahn.h"
+#include <string>
 
 using namespace std;
 
 void GraphK::addEdge(int verticeOut, int verticeIn)
 {
-	adjacencies[verticeOut].push_back(verticeIn);
-	inDegree[verticeIn]++;
+    if (verticeOut < verticesCount && verticeIn < verticesCount)
+    {
+        adjacencies[verticeOut].push_back(verticeIn);
+        inDegree[verticeIn]++;
+    }
+    else
+        throw exception("¬ведены неверные данные!");
 }
 
-void GraphK::topologicalSort()
+wstring GraphK::topologicalSort()
 {
-	queue<int> queue;
-	vector<int> result;
+    wstring string;
 
-	for (int i = 0; i < verticesCount; i++)
-		if (inDegree[i] == 0)
-			queue.push(i);
+    queue<int> queue;
+    vector<int> result;
 
-	while (!queue.empty())
-	{
-		int verticeOut = queue.front();
-		queue.pop();
-		result.push_back(verticeOut);
+    for (int i = 0; i < verticesCount; i++)
+        if (inDegree[i] == 0)
+            queue.push(i);
 
-		for (int verticeIn : adjacencies[verticeOut])
-		{
-			inDegree[verticeIn]--;
+    while (!queue.empty())
+    {
+        int verticeOut = queue.front();
+        queue.pop();
+        result.push_back(verticeOut);
 
-			if (inDegree[verticeIn] == 0)
-				queue.push(verticeIn);
-		}
-	}
+        for (int verticeIn : adjacencies[verticeOut])
+        {
+            inDegree[verticeIn]--;
 
-	if (result.size() != verticesCount)
-	{
-		cout << "There is a cycle in the graph!" << endl;
-		return;
-	}
-	else
-	{
-		cout << "Topological sort: " << endl;
+            if (inDegree[verticeIn] == 0)
+                queue.push(verticeIn);
 
-		for (int vertice : result)
-			cout << vertice << " ";
-		cout << endl;
-	}
+            auto it = find(adjacencies[verticeIn].begin(), adjacencies[verticeIn].end(), verticeOut);
+            if (it != adjacencies[verticeIn].end())
+                adjacencies[verticeIn].erase(it);
+        }
+    }
+
+    if (result.size() != verticesCount)
+        string = L"√раф содержит цикл!";
+    else
+        for (int vertice : result)
+        {
+            string.append(to_wstring(vertice));
+            string.append(L" ");
+        }
+
+    return string;
 }

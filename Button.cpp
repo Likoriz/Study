@@ -36,7 +36,22 @@ sf::Text Button::getText()
 	return text;
 }
 
+void Button::setText(std::wstring text_)
+{
+	text.setString(text_);
+
+	sf::FloatRect textBounds = text.getLocalBounds();
+	float textPosX = rect.getPosition().x + rect.getSize().x / 2 - textBounds.width / 2;
+	float textPosY = rect.getPosition().y + rect.getSize().y / 2 - textBounds.height / 2;
+	text.setPosition(textPosX, textPosY);
+}
+
 int Button::getNavigation()
 {
 	return leadsTo;
+}
+
+void Button::setColour(Color color_)
+{
+	rect.setFillColor(color_);
 }

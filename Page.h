@@ -8,11 +8,11 @@ private:
 	Button** buttons;
 	int buttonsCount;
 
-	Photo** photos;
-	int photosCount;
+	Photo** photos = nullptr;
+	int photosCount = 0;
 
-	Photo* currentPhoto;
-	int cur;
+	Photo* currentPhoto = nullptr;
+	int cur = 0;
 public:
 	Page(int page);
 	Button** getButtons();
@@ -22,6 +22,11 @@ public:
 	Photo* getCurrentPhoto();
 	void prevPhoto();
 	void nextPhoto();
+
+	void changeColour(int button);
+	int getCur();
+	void setCur(int cur_);
+	void clearPage();
 
 	void draw(sf::RenderWindow& window);
 };

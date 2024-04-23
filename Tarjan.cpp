@@ -1,4 +1,5 @@
 #include "Tarjan.h"
+#include <string>
 
 using namespace std;
 
@@ -15,20 +16,26 @@ void GraphT::dfs(int vertice)
 
 void GraphT::addEdge(int verticeOut, int verticeIn)
 {
-	adjacencies[verticeOut].push_back(verticeIn);
+	if (verticeOut < verticesCount && verticeIn < verticesCount)
+		adjacencies[verticeOut].push_back(verticeIn);
+	else
+		throw exception("¬ведены неверные данные!");
 }
 
-void GraphT::topologicalSort()
+wstring GraphT::topologicalSort()
 {
+	wstring string;
+
 	for (int i = 0; i < verticesCount; i++)
 		if (!visited[i])
 			dfs(i);
 
-	cout << "Topological sort: " << endl;
 	while (!s.empty())
 	{
-		cout << s.top() << " ";
+		string.append(to_wstring(s.top()));
+		string.append(L" ");
 		s.pop();
 	}
-	cout << endl;
+
+	return string;
 }

@@ -143,6 +143,7 @@
     <ClCompile Include="Photo.cpp" />
     <ClCompile Include="SAOD_TeachMeTheWays.cpp" />
     <ClCompile Include="Tarjan.cpp" />
+    <ClCompile Include="TestChecker.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.h" />
@@ -152,6 +153,7 @@
     <ClInclude Include="Page.h" />
     <ClInclude Include="Photo.h" />
     <ClInclude Include="Tarjan.h" />
+    <ClInclude Include="TestChecker.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

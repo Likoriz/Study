@@ -9,7 +9,7 @@ class GraphK
 public:
 	GraphK(int vertices) : verticesCount(vertices), adjacencies(vertices), inDegree(vertices, 0) {}
 	void addEdge(int verticeOut, int verticeIn);
-	void topologicalSort();
+	std::wstring topologicalSort();
 
 private:
 	int verticesCount;
